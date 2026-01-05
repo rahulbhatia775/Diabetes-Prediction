@@ -22,5 +22,5 @@ def predict():
     final_features = np.array([float_features])
     prediction = model.predict(sc.transform(final_features))
     return render_template("index.html", prediction_text=str(prediction.tolist()))
-def handler(event, context):
-    return app(event, context)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=10000)
