@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diabetes Predictor - Early Detection for Better Health</title>
+  <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap' rel='stylesheet'>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      width: 100%;
+      font-family: 'Poppins', sans-serif;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+
+    /* Header */
+    header {
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #FF6B35;
+    }
+
+    .logo-icon {
+      font-size: 32px;
+    }
+
+    nav {
+      display: flex;
+      gap: 30px;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #FF6B35;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #FFF4E6 0%, #FFE8D6 100%);
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      color: #FF6B35;
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #555;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-top: 50px;
+      flex-wrap: wrap;
+    }
+
+    .stat-box {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: 700;
+      color: #FF6B35;
+    }
+
+    .stat-label {
+      font-size: 16px;
+      color: #666;
+      margin-top: 8px;
+    }
+
+    /* Info Section */
+    .info-section {
+      padding: 80px 20px;
+      background: #fff;
+    }
+
+    .info-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 50px;
+    }
+
+    .info-card {
+      background: #FFF9F5;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      border: 2px solid #FFE8D6;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(255, 107, 53, 0.15);
+    }
+
+    .info-icon {
+      font-size: 60px;
+      margin-bottom: 20px;
+    }
+
+    .info-card h3 {
+      color: #FF6B35;
+      font-size: 22px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .info-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    /* Section Title */
+    .section-title {
+      text-align: center;
+      font-size: 38px;
+      color: #FF6B35;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    /* Predictor Section */
+    .predictor-section {
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #FFF4E6 0%, #FFE8D6 100%);
+    }
+
+    .predictor-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(255, 107, 53, 0.15);
+    }
+
+    .predictor-header {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .predictor-header h2 {
+      color: #FF6B35;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .predictor-header p {
+      color: #666;
+      font-size: 16px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .input-helper {
+      font-size: 12px;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      background: #FFF9F5;
+      border: 2px solid #FFE8D6;
+      border-radius: 10px;
+      outline: none;
+      font-size: 16px;
+      color: #333;
+      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    input::placeholder {
+      color: #aaa;
+    }
+
+    input:focus {
+      border-color: #FF6B35;
+      background: #fff;
+    }
+
+    button {
+      width: 100%;
+      padding: 18px;
+      margin-top: 10px;
+      background: #FF6B35;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    }
+
+    button:hover {
+      background: #E55A2B;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      background: #FFF9F5;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+      border: 2px solid #FFE8D6;
+      display: none;
+    }
+
+    .result.show {
+      display: block;
+    }
+
+    /* Risk Factors Section */
+    .risk-factors {
+      padding: 80px 20px;
+      background: #fff;
+    }
+
+    .risk-grid {
+      max-width: 1200px;
+      margin: 50px auto 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .risk-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      padding: 20px;
+      background: #FFF9F5;
+      border-radius: 10px;
+      border-left: 4px solid #FF6B35;
+    }
+
+    .risk-item-icon {
+      font-size: 30px;
+      flex-shrink: 0;
+    }
+
+    .risk-item h4 {
+      color: #FF6B35;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .risk-item p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      background: #2C3E50;
+      color: #fff;
+      padding: 40px 20px 20px;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-note {
+      font-size: 14px;
+      color: #bbb;
+      margin-bottom: 15px;
+      line-height: 1.6;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #FF6B35;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .copyright {
+      font-size: 13px;
+      color: #999;
+      padding-top: 20px;
+      border-top: 1px solid #3a4f63;
+    }
+
+    /* Results Banner */
+    .results-banner {
+      display: none;
+      padding: 60px 20px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .results-banner.show {
+      display: block;
+    }
+
+    .results-banner.high-risk {
+      background: linear-gradient(135deg, #FFE5E5 0%, #FFD4D4 100%);
+      border-bottom: 5px solid #DC3545;
+    }
+
+    .results-banner.low-risk {
+      background: linear-gradient(135deg, #E8F5E9 0%, #D4F1D7 100%);
+      border-bottom: 5px solid #28A745;
+    }
+
+    .results-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .results-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .results-icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
+
+
+    .results-title {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+    .results-banner.high-risk .results-title {
+      color: #DC3545;
+    }
+
+    .results-banner.low-risk .results-title {
+      color: #28A745;
+    }
+
+    .results-subtitle {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .results-banner.high-risk .results-subtitle {
+      color: #C82333;
+    }
+
+    .results-banner.low-risk .results-subtitle {
+      color: #218838;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .results-card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .results-banner.high-risk .results-card {
+      border-left: 5px solid #DC3545;
+    }
+
+    .results-banner.low-risk .results-card {
+      border-left: 5px solid #28A745;
+    }
+
+    .results-card-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .results-card-icon {
+      font-size: 40px;
+    }
+
+    .results-card h3 {
+      font-size: 22px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .results-banner.high-risk .results-card h3 {
+      color: #DC3545;
+    }
+
+    .results-banner.low-risk .results-card h3 {
+      color: #28A745;
+    }
+
+    .results-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .results-card li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .results-card li:last-child {
+      border-bottom: none;
+    }
+
+    .results-card li::before {
+      content: '•';
+      font-size: 20px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .results-banner.high-risk .results-card li::before {
+      color: #DC3545;
+    }
+
+    .results-banner.low-risk .results-card li::before {
+      color: #28A745;
+    }
+
+    .urgent-action {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      margin-top: 40px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .results-banner.high-risk .urgent-action {
+      border: 3px solid #DC3545;
+    }
+
+    .results-banner.low-risk .urgent-action {
+      border: 3px solid #28A745;
+    }
+
+    .urgent-action h3 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .results-banner.high-risk .urgent-action h3 {
+      color: #DC3545;
+    }
+
+    .results-banner.low-risk .urgent-action h3 {
+      color: #28A745;
+    }
+
+    .urgent-action p {
+      font-size: 18px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 25px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      padding: 15px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .action-btn-primary {
+      background: #DC3545;
+      color: #fff;
+    }
+
+    .action-btn-primary:hover {
+      background: #C82333;
+      transform: translateY(-2px);
+    }
+
+    .results-banner.low-risk .action-btn-primary {
+      background: #28A745;
+    }
+
+    .results-banner.low-risk .action-btn-primary:hover {
+      background: #218838;
+    }
+
+    .action-btn-secondary {
+      background: #fff;
+      color: #333;
+      border: 2px solid #ddd;
+    }
+
+    .action-btn-secondary:hover {
+      border-color: #FF6B35;
+      color: #FF6B35;
+      transform: translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .section-title {
+        font-size: 30px;
+      }
+
+      .predictor-container {
+        padding: 40px 25px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .stats-container {
+        gap: 30px;
+      }
+
+      .stat-number {
+        font-size: 36px;
+      }
+    }
+
+    /* Alert Banner */
+    .alert-banner {
+      background: #FFE8D6;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #FF6B35;
+      font-weight: 500;
+    }
+
+    .post-analysis-banner {
+      display: none;
+      padding: 50px 20px;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+    }
+
+
+    .post-analysis-banner.show {
+      display: block;
+    }
+
+
+    .analysis-danger {
+      background: #FFE5E5;
+      border-bottom: 6px solid #D63031;
+      color: #C0392B;
+    }
+
+
+    .analysis-safe {
+      background: #E8F8E8;
+      border-bottom: 6px solid #27AE60;
+      color: #1E874B;
+    }
+
+
+    .analysis-title {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+
+
+    .analysis-text {
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 900px;
+      margin: 0 auto;
+      margin-bottom: 15px;
+    }
+
+
+    .analysis-list {
+      margin-top: 25px;
+      font-size: 16px;
+      max-width: 850px;
+      margin: 20px auto;
+      text-align: left;
+    }
+
+
+    .analysis-list li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Alert Banner -->
+  <div class="alert-banner">
+    ⚠️ Early detection saves lives. Take the test today and know your risk.
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <div class="logo">
+        <span class="logo-icon">🩺</span>
+        <span>DiabetesCheck</span>
+      </div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#predictor">Check Now</a>
+        <a href="#risks">Risk Factors</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <section id="postAnalysisBanner" class="post-analysis-banner">
+    <!-- Dynamic red/green content will appear here -->
+  </section>
+
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>🇮🇳 Diabetes Early Detection Portal</h1>
+      <p><strong>India is the Diabetes Capital of the World</strong></p>
+      <p>With over 77 million diabetics, early detection is crucial for healthy living</p>
+
+      <div class="stats-container">
+        <div class="stat-box">
+          <div class="stat-number">77M+</div>
+          <div class="stat-label">Indians with Diabetes</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">50%</div>
+          <div class="stat-label">Cases Undiagnosed</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">2 Min</div>
+          <div class="stat-label">Quick Health Check</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Banner (Hidden by default, shown after analysis) -->
+  <section class="results-banner" id="resultsBanner">
+    <div class="results-content">
+      <div class="results-header">
+        <div class="results-icon" id="resultsIcon">⚠️</div>
+        <h2 class="results-title" id="resultsTitle">Analysis Complete</h2>
+        <p class="results-subtitle" id="resultsSubtitle">Here's what you need to know</p>
+      </div>
+
+      <div class="results-grid" id="resultsGrid">
+        <!-- Cards will be dynamically inserted here -->
+      </div>
+
+      <div class="urgent-action">
+        <h3 id="actionTitle">Next Steps</h3>
+        <p id="actionMessage">Take action today for a healthier tomorrow</p>
+        <div class="action-buttons">
+          <a href="#" class="action-btn action-btn-primary" id="primaryAction">Find a Doctor</a>
+          <a href="#predictor" class="action-btn action-btn-secondary">Take Test Again</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Info Section -->
+  <section class="info-section" id="about">
+    <div class="info-content">
+      <h2 class="section-title">Why Early Detection Matters</h2>
+      <p class="section-subtitle">Understanding diabetes can save your life and improve your quality of living</p>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-icon">🫀</div>
+          <h3>Prevent Complications</h3>
+          <p>Early detection helps prevent heart disease, kidney failure, and nerve damage through timely intervention.
+          </p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">👁️</div>
+          <h3>Protect Your Vision</h3>
+          <p>Diabetic retinopathy is a leading cause of blindness. Early management can preserve your eyesight.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">💪</div>
+          <h3>Better Lifestyle</h3>
+          <p>Know your risk early and adopt healthy habits - proper diet, exercise, and regular monitoring.</p>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">📊</div>
+          <h3>AI-Powered Analysis</h3>
+          <p>Our predictor uses advanced machine learning trained on Indian population health data.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Predictor Section -->
+  <section class="predictor-section" id="predictor">
+    <div class="predictor-container">
+      <div class="predictor-header">
+        <h2>🩺 Check Your Diabetes Risk</h2>
+        <p>Enter your health metrics for instant AI-powered analysis</p>
+      </div>
+
+      <form action="{{ url_for('predict') }}" method="post">
+        <div class="input-group">
+          <label for="glucose">🔬 Glucose Level (mg/dL)</label>
+          <input type="number" id="glucose" name="Glucose Level" placeholder="Enter fasting glucose level" required
+            min="0" step="0.1">
+          <div class="input-helper">Normal fasting: 70-100 mg/dL</div>
+        </div>
+
+        <div class="input-group">
+          <label for="insulin">💉 Insulin Level (μU/mL)</label>
+          <input type="number" id="insulin" name="Insulin" placeholder="Enter insulin level" required min="0"
+            step="0.1">
+          <div class="input-helper">Normal range: 2.6-24.9 μU/mL</div>
+        </div>
+
+        <div class="input-group">
+          <label for="bmi">⚖️ BMI (Body Mass Index)</label>
+          <input type="number" id="bmi" name="BMI" placeholder="Enter your BMI" required min="0" step="0.1">
+          <div class="input-helper">Calculate: Weight(kg) ÷ Height²(m)</div>
+        </div>
+
+        <div class="input-group">
+          <label for="age">👤 Age (years)</label>
+          <input type="number" id="age" name="Age" placeholder="Enter your age" required min="0" max="120">
+          <div class="input-helper">Risk increases with age</div>
+        </div>
+
+        <button type="submit">🔍 Analyze My Risk</button>
+      </form>
+
+    </div>
+  </section>
+
+  <!-- Risk Factors Section -->
+  <section class="risk-factors" id="risks">
+    <div class="info-content">
+      <h2 class="section-title">Common Risk Factors in India</h2>
+      <p class="section-subtitle">Understanding what puts you at risk</p>
+
+      <div class="risk-grid">
+        <div class="risk-item">
+          <div class="risk-item-icon">🍛</div>
+          <div>
+            <h4>Diet & Nutrition</h4>
+            <p>High carbohydrate diet, processed foods, and sugary beverages increase diabetes risk.</p>
+          </div>
+        </div>
+
+        <div class="risk-item">
+          <div class="risk-item-icon">🏃‍♂️</div>
+          <div>
+            <h4>Sedentary Lifestyle</h4>
+            <p>Lack of physical activity and desk jobs contribute to obesity and insulin resistance.</p>
+          </div>
+        </div>
+
+        <div class="risk-item">
+          <div class="risk-item-icon">🧬</div>
+          <div>
+            <h4>Family History</h4>
+            <p>Having a parent or sibling with diabetes significantly increases your risk.</p>
+          </div>
+        </div>
+
+        <div class="risk-item">
+          <div class="risk-item-icon">😰</div>
+          <div>
+            <h4>Stress & Sleep</h4>
+            <p>Chronic stress and poor sleep patterns affect blood sugar regulation.</p>
+          </div>
+        </div>
+
+        <div class="risk-item">
+          <div class="risk-item-icon">⚖️</div>
+          <div>
+            <h4>Obesity</h4>
+            <p>Excess weight, especially around the waist, is a major diabetes risk factor.</p>
+          </div>
+        </div>
+
+        <div class="risk-item">
+          <div class="risk-item-icon">📈</div>
+          <div>
+            <h4>Age Factor</h4>
+            <p>Risk increases after age 45, but Type 2 diabetes is now affecting younger Indians.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-note">
+        <strong>⚕️ Medical Disclaimer:</strong> This tool is for educational purposes only and should not replace
+        professional medical advice.
+        Always consult with a qualified healthcare provider for proper diagnosis and treatment.
+      </div>
+
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Contact Us</a>
+        <a href="#">About the Model</a>
+      </div>
+
+      <div class="copyright">
+        © 2025 DiabetesCheck India. Empowering healthier lives through early detection.
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    function showAnalysisBanner(type) {
+      const banner = document.getElementById('postAnalysisBanner');
+
+
+      if (type === 'danger') {
+        banner.classList.add('show', 'analysis-danger');
+                    banner.innerHTML = `
+            <h2 class="analysis-title">⚠️ High Diabetes Risk Detected</h2>
+            <p class="analysis-text">
+            Your health indicators show signs that may be associated with diabetes. Early detection is crucial — untreated diabetes can lead to severe complications affecting the heart, kidneys, eyes, nerves, and overall quality of life.
+            It is extremely important that you consult a certified medical professional for a proper diagnosis.
+            </p>
+            <ul class="analysis-list">
+            <li>• Schedule a blood sugar test (Fasting, PP, HbA1c)</li>
+            <li>• Avoid sugary drinks and high-carb foods immediately</li>
+            <li>• Increase water intake and start light exercise</li>
+            <li>• Monitor symptoms like fatigue, excessive urination, or thirst</li>
+            </ul>
+            <p class="analysis-text"><strong>⚕️ A doctor’s evaluation is essential. Do not rely solely on online tools.</strong></p>
+            `;
+                  } else if (type === 'safe') {
+                    banner.classList.add('show', 'analysis-safe');
+                    banner.innerHTML = `
+            <h2 class="analysis-title">✅ Low Diabetes Risk</h2>
+            <p class="analysis-text">
+            Your test shows no immediate signs of diabetes risk. This is great — maintaining a healthy lifestyle now ensures long-term well-being.
+            Even if you're healthy, regular checkups and good habits keep your risk low.
+            </p>
+            <ul class="analysis-list">
+            <li>• Maintain a balanced diet with high fiber</li>
+            <li>• Exercise at least 30 minutes daily</li>
+            <li>• Get 7–8 hours of consistent sleep</li>
+            <li>• Manage stress through meditation or yoga</li>
+            <li>• Do yearly blood sugar screening</li>
+            </ul>
+            <p class="analysis-text"><strong>🌿 Keep building a healthy and active lifestyle!</strong></p>
+            `;
+      }
+    }
+
+    if (location.pathname === "/predict") {
+      const predictionText = {{ prediction_text | default('', true) | tojson }};
+      showAnalysisBanner(predictionText === "[1]" ? "danger" : "safe");
+    };
+  </script>
+</body>
+
+</html>
